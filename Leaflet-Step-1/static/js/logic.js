@@ -82,3 +82,9 @@ function createMap(earthquakes, plates) {
         "Satellite": satellitemap
     };
 
+    var overlayMaps = {
+        Plates: plates,
+        Earthquakes: earthquakes
+    };
+
+    
