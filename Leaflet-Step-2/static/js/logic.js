@@ -1,5 +1,4 @@
 var quakes = "https://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/all_week.geojson"
-var plates = "https://raw.githubusercontent.com/fraxen/tectonicplates/master/GeoJSON/PB2002_plates.json"
 
 var color0 = "limegreen";
 var color1 = "chartreuse";
@@ -13,13 +12,9 @@ d3.json(quakes, function(data) {
     loadPlates(data.features);
 });
 
-function loadPlates(earthquakeData) {
-    d3.json(plates, function(data) {
-        createFeatures(earthquakeData, data.features);
-    });    
-}
 
-function createFeatures(earthquakeData, plateData) {
+
+function createFeatures(earthquakeData) {
     function handleFeature(feature, layer) {
         layer.bindPopup("<h3>" + feature.properties.place +
       "</h3><hr><p>" + new Date(feature.properties.time) + "</p>");
@@ -54,19 +49,12 @@ function createFeatures(earthquakeData, plateData) {
         onEachFeature: handleFeature
     });
     
-    var plates = L.geoJSON(plateData, {
-    style: function (feature) {
-        var latlngs = (feature.geometry.coordinates);
-        return L.polyline(latlngs, {color: 'red'});
-        }
-    });
 
-
-    createMap(earthquakes, plates);
+    createMap(earthquakes);
 }
 
 
-function createMap(earthquakes, plates) {
+function createMap(earthquakes) {
 
     var streetmap = L.tileLayer("https://api.mapbox.com/styles/v1/mapbox/streets-v9/tiles/256/{z}/{x}/{y}?access_token=pk.eyJ1IjoibGl0dGxlc3Rkb2xsIiwiYSI6ImNqZHdnbTBzYTQ3bXUyeG80ZTQ3dWJtNjIifQ.uvSL6xgyBBXQSJ1Yopx9gA");
 
@@ -83,7 +71,6 @@ function createMap(earthquakes, plates) {
     };
 
     var overlayMaps = {
-        Plates: plates,
         Earthquakes: earthquakes
     };
 
@@ -91,7 +78,7 @@ function createMap(earthquakes, plates) {
     var myMap = L.map("map", {
         center: [34.052235, -119.243683],
         zoom: 4.5,
-        layers: [streetmap, plates, earthquakes]
+        layers: [streetmap, earthquakes]
     });
 
     var legend = L.control({position: 'bottomright'});
