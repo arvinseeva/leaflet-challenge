@@ -19,3 +19,10 @@ function loadPlates(earthquakeData) {
     });    
 }
 
+function createFeatures(earthquakeData, plateData) {
+    function handleFeature(feature, layer) {
+        layer.bindPopup("<h3>" + feature.properties.place +
+      "</h3><hr><p>" + new Date(feature.properties.time) + "</p>");
+    }
+
+    
