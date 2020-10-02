@@ -47,4 +47,38 @@ function createFeatures(earthquakeData, plateData) {
         };
     }
     
+    var earthquakes = L.geoJSON(earthquakeData, {
+        pointToLayer: function (feature, latlng) {
+            return L.circleMarker(latlng, getGeoJsonMarkerOptions(feature));
+        },  
+        onEachFeature: handleFeature
+    });
     
+    var plates = L.geoJSON(plateData, {
+    style: function (feature) {
+        var latlngs = (feature.geometry.coordinates);
+        return L.polyline(latlngs, {color: 'red'});
+        }
+    });
+
+
+    createMap(earthquakes, plates);
+}
+
+
+function createMap(earthquakes, plates) {
+
+    var streetmap = L.tileLayer("https://api.mapbox.com/styles/v1/mapbox/streets-v9/tiles/256/{z}/{x}/{y}?access_token=pk.eyJ1IjoibGl0dGxlc3Rkb2xsIiwiYSI6ImNqZHdnbTBzYTQ3bXUyeG80ZTQ3dWJtNjIifQ.uvSL6xgyBBXQSJ1Yopx9gA");
+
+    var darkmap = L.tileLayer("https://api.mapbox.com/styles/v1/mapbox/dark-v9/tiles/256/{z}/{x}/{y}?access_token=pk.eyJ1IjoibGl0dGxlc3Rkb2xsIiwiYSI6ImNqZHdnbTBzYTQ3bXUyeG80ZTQ3dWJtNjIifQ.uvSL6xgyBBXQSJ1Yopx9gA");
+    
+    var satellitemap = L.tileLayer("https://api.mapbox.com/styles/v1/mapbox/satellite-streets-v9/tiles/256/{z}/{x}/{y}?access_token=pk.eyJ1IjoibGl0dGxlc3Rkb2xsIiwiYSI6ImNqZHdnbTBzYTQ3bXUyeG80ZTQ3dWJtNjIifQ.uvSL6xgyBBXQSJ1Yopx9gA");
+
+
+
+    var baseMaps = {
+        "Street Map": streetmap,
+        "Dark Map": darkmap,
+        "Satellite": satellitemap
+    };
+
