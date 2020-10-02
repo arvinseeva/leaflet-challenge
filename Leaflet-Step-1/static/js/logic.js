@@ -87,4 +87,12 @@ function createMap(earthquakes, plates) {
         Earthquakes: earthquakes
     };
 
-    
+
+    var myMap = L.map("map", {
+        center: [34.052235, -119.243683],
+        zoom: 4.5,
+        layers: [streetmap, plates, earthquakes]
+    });
+
+    var legend = L.control({position: 'bottomright'});
+
