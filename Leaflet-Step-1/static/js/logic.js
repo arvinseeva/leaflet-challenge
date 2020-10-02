@@ -107,4 +107,14 @@ function createMap(earthquakes, plates) {
             grades = [color0, color1, color2, color3, color4, color5],
             labels = ["0-1", "1-2","2-3", "3-4", "4-5", "5+"]
 
+            for (var i = 0; i < grades.length; i++) {
+                div.innerHTML +=
+                    '<i style="background:' + grades[i] + '"></i> ' + labels[i] + '<br>';
+            }
             
+            return div;
+        };
+            
+        legend.addTo(myMap);    
+    }
+    
