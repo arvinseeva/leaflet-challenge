@@ -96,3 +96,15 @@ function createMap(earthquakes, plates) {
 
     var legend = L.control({position: 'bottomright'});
 
+
+    L.control
+        .layers(baseMaps, overlayMaps, {
+            collapsed: false
+        }).addTo(myMap);
+    
+    legend.onAdd = function (map) {
+        var div = L.DomUtil.create('div', 'info legend'),
+            grades = [color0, color1, color2, color3, color4, color5],
+            labels = ["0-1", "1-2","2-3", "3-4", "4-5", "5+"]
+
+            
