@@ -13,3 +13,9 @@ d3.json(quakes, function(data) {
     loadPlates(data.features);
 });
 
+function loadPlates(earthquakeData) {
+    d3.json(plates, function(data) {
+        createFeatures(earthquakeData, data.features);
+    });    
+}
+
