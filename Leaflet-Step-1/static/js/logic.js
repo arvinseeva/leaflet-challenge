@@ -25,4 +25,26 @@ function createFeatures(earthquakeData, plateData) {
       "</h3><hr><p>" + new Date(feature.properties.time) + "</p>");
     }
 
+    function getGeoJsonMarkerOptions(feature) {
+        color = color5;
+        if (feature.properties.mag <= 1) {
+            color = color1;
+        } else if (feature.properties.mag <= 2) {
+            color = color2;
+        } else if (feature.properties.mag <= 3) {
+            color = color3;
+        } else if (feature.properties.mag <= 4) {
+            color = color4;
+        }
+
+        return {
+            radius: feature.properties.mag * 5,
+            fillColor: color,
+            color: "#000",
+            weight: 1,
+            opacity: 1,
+            fillOpacity: 0.8
+        };
+    }
+    
     
