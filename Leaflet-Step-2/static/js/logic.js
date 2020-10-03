@@ -8,9 +8,7 @@ var color4 = "darkorange";
 var color5 = "red";
 var legend = L.control();
 
-d3.json(quakes, function(data) {
-    loadPlates(data.features);
-});
+d3.json(quakes, function(data) );
 
 
 
